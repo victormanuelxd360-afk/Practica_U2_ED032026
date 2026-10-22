@@ -1,0 +1,75 @@
+PRUEBAS DE LA UNIDAD II
+Java 21.0.11
+
+OK | L1: escanear 100 objetos Producto
+OK | L1: rangos aleatorios de cantidad y precio
+OK | L1: retiro sin pérdida del historial
+OK | L1: no retirar dos veces
+OK | L2: genera 500 números y clasifica todos correctamente
+OK | L2: conserva todos los números, incluidos repetidos
+OK | L2: rechaza cantidad fuera de rango
+OK | L3: separación en el límite 7
+OK | L3: reprobados extraídos de la lista inicial
+OK | L3: rechaza notas mayores a diez
+OK | L3: rechaza nombre vacío
+OK | L4: orden alfabético por nombre
+OK | L4: total decimal exacto 74.50
+OK | L4: elimina por clave y recalcula total
+OK | L4: claves únicas sin distinguir mayúsculas
+OK | L4: clave inexistente
+OK | L4: precio negativo
+OK | L5: creación dinámica de listas e inicial acentuada
+OK | L5: valida palabra individual
+OK | P1: ejemplo UTM -> MTU
+OK | P1: caracteres Unicode completos
+OK | P1: entrada faltante
+OK | P2: frase palíndroma
+OK | P2: número y caso negativo
+OK | P2: requiere letras o números
+OK | P3: acarreo de 30 dígitos
+OK | P3: cero y ceros iniciales
+OK | P3: 200 sumas aleatorias de hasta 1234 dígitos contra oráculo BigInteger (sólo en pruebas)
+OK | P3: contrato de enteros no negativos
+OK | P3: rechaza letras
+OK | P4: reemplaza todas las apariciones y conserva el orden
+OK | P4: valor ausente
+OK | P4: pila vacía
+OK | C1: atiende cola vacía con mensaje
+OK | C1: capacidad, frente y final
+OK | C1: rechaza sobreflujo
+OK | C1: FIFO y tiempo de espera exacto de 18 segundos
+OK | C1: queda vacía después de atender
+OK | C2: primer coche e intervalo inicial de 20 segundos
+OK | C2: no llega antes del tiempo
+OK | C2: llegada exacta a los 20 segundos
+OK | C2: color incorrecto no elimina el frente
+OK | C2: la cola se conserva tras error
+OK | C2: acelera de 20 a 18 segundos cada tres aciertos
+OK | C2: récord con cantidad y tiempo
+OK | C2: fin exacto en cinco coches y tiempo detenido en 80 s
+OK | C2: no permite pintar después del final
+OK | C2: reinicia partida y conserva récord
+OK | C2: límite inferior de dos segundos
+OK | C3: salida con estacionamiento vacío
+OK | C3: enlaces anterior/siguiente y circularidad
+OK | C3: rechaza placas duplicadas
+OK | C3: salida FIFO y cobro de 30 x 2 = 60 pesos
+OK | C3: elimina último nodo y restablece estructura
+OK | C3: mil nodos sin cupo fijo; verifica FIFO y enlaces en cada salida
+OK | Validación: separador decimal coma
+OK | Validación: cantidad requiere entero
+OK | Validación: desbordamiento numérico
+OK | Validación: rechaza NaN
+OK | Validación: datos faltantes
+OK | Interfaz: doce pantallas y acciones ejecutadas mediante sus controles
+OK | Interfaz L1: botón de retiro actualiza datos y tabla
+OK | Interfaz L2: botón genera las tres listas
+OK | Interfaz C1: botón captura sobreflujo sin modificar la cola
+OK | Interfaz P3: mensaje adecuado al introducir letras
+OK | Interfaz L3: muestra error de calificación fuera de rango
+OK | Interfaz L4: muestra error de datos faltantes
+OK | Proyecto independiente Listas: menú con 5 ejercicios
+OK | Proyecto independiente Pilas: menú con 4 ejercicios
+OK | Proyecto independiente Colas: menú con 3 ejercicios
+
+TOTAL: 70 verificaciones correctas. Sin fallos.

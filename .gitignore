@@ -1,0 +1,10 @@
+**/build/
+*.class
+__pycache__/
+*.pyc
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+.env
+.env.*

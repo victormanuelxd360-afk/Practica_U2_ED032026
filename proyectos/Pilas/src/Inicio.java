@@ -1,0 +1,1 @@
+public class Inicio { public static void main(String[] args) { PracticaApp.main(new String[] { "Pilas" }); } }

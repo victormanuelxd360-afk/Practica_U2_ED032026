@@ -1,0 +1,23 @@
+1. Práctica de la Unidad II
+2. Guía de ejecución y contenido
+3. Arquitectura y decisiones
+4. L1. Productos disponibles y retirados
+5. L2. Pares e impares
+6. L3. Aprobados y reprobados
+7. L4. Eliminar y ordenar productos
+8. L5. Listar palabras por letra
+9. P1. Invertir palabra
+10. P2. Palíndromo
+11. P3. Suma de números grandes
+12. P4. Reemplazar valor en pila
+13. C1. Ventanilla de un banco
+14. C2. Juego: pintar coches
+15. C3. Estacionamiento para autos
+16. Juego: aceleración y fin de partida
+17. Validaciones de entrada y operación
+18. Validaciones de entrada y operación
+19. Validaciones de entrada y operación
+20. Verificación y entrega
+21. Trazabilidad de la implementación
+22. Registro de pruebas automáticas
+23. Registro de pruebas automáticas

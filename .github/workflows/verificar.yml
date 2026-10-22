@@ -1,0 +1,26 @@
+name: Compilar y probar la practica
+
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compilar los proyectos y ejecutar las 70 verificaciones
+        shell: pwsh
+        run: ./herramientas/compilar.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: practica-ejecutables-y-pruebas
+          path: |
+            Practica_U2.jar
+            proyectos/*/*.jar
+            documentacion/pruebas_resultados.txt
