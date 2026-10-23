@@ -99,14 +99,14 @@ public sealed class Estado
     {
         juego.Actualizar(Environment.TickCount64);
         return new {
-            L1 = new { almacen.Disponibles, almacen.Retirados },
+            L1 = new { disponibles = almacen.Disponibles.ToArray(), retirados = almacen.Retirados.ToArray() },
             L2 = resultados.GetValueOrDefault("L2"),
-            L3 = new { grupo.Aprobados, grupo.Reprobados },
+            L3 = new { aprobados = grupo.Aprobados.ToArray(), reprobados = grupo.Reprobados.ToArray() },
             L4 = new { productos = compra.Ordenados(), total = compra.Total() },
-            L5 = new { original = palabras, grupos = Algoritmos.Agrupar(palabras) },
+            L5 = new { original = palabras.ToArray(), grupos = Algoritmos.Agrupar(palabras) },
             P1 = resultados.GetValueOrDefault("P1"), P2 = resultados.GetValueOrDefault("P2"), P3 = resultados.GetValueOrDefault("P3"), P4 = resultados.GetValueOrDefault("P4"),
             C1 = new { clientes = banco.Clientes.Lista(), capacidad = banco.Clientes.Capacidad, frente = banco.Clientes.ColaVacia() ? -1 : banco.Clientes.Frente().Turno, final = banco.Clientes.ColaVacia() ? -1 : banco.Clientes.Final().Turno, atencion = resultados.GetValueOrDefault("atencion") },
-            C2 = new { coches = juego.Coches.Lista().Select(c => new { c.Numero, color = c.Color.ToString() }), juego.Activo, juego.Pintados, juego.Record, juego.TiempoRecord, segundos = juego.Transcurrido(Environment.TickCount64), intervalo = juego.Intervalo / 1000 },
+            C2 = new { coches = juego.Coches.Lista().Select(c => new { c.Numero, color = c.Color.ToString() }).ToArray(), juego.Activo, juego.Pintados, juego.Record, juego.TiempoRecord, segundos = juego.Transcurrido(Environment.TickCount64), intervalo = juego.Intervalo / 1000 },
             C3 = new { autos = parking.Lista(), recibo = resultados.GetValueOrDefault("recibo") }
         };
     }
