@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{256F4E96-6A7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticaWeb", "Web\PracticaWeb.csproj", "{89C5BF16-5682-4EF0-9DAC-0900F6A9770B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebPublica", "WebPublica", "{BD7290EE-2248-A724-C824-E1AA298D1C8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticaPublica", "WebPublica\PracticaPublica.csproj", "{2183F84C-6D16-4013-8885-B0AEAEAEC84C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,11 +33,24 @@ Global
 		{89C5BF16-5682-4EF0-9DAC-0900F6A9770B}.Release|x64.Build.0 = Release|Any CPU
 		{89C5BF16-5682-4EF0-9DAC-0900F6A9770B}.Release|x86.ActiveCfg = Release|Any CPU
 		{89C5BF16-5682-4EF0-9DAC-0900F6A9770B}.Release|x86.Build.0 = Release|Any CPU
+		{2183F84C-6D16-4013-8885-B0AEAEAEC84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2183F84C-6D16-4013-8885-B0AEAEAEC84C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2183F84C-6D16-4013-8885-B0AEAEAEC84C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2183F84C-6D16-4013-8885-B0AEAEAEC84C}.Debug|x64.Build.0 = Debug|Any CPU
+		{2183F84C-6D16-4013-8885-B0AEAEAEC84C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2183F84C-6D16-4013-8885-B0AEAEAEC84C}.Debug|x86.Build.0 = Debug|Any CPU
+		{2183F84C-6D16-4013-8885-B0AEAEAEC84C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2183F84C-6D16-4013-8885-B0AEAEAEC84C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2183F84C-6D16-4013-8885-B0AEAEAEC84C}.Release|x64.ActiveCfg = Release|Any CPU
+		{2183F84C-6D16-4013-8885-B0AEAEAEC84C}.Release|x64.Build.0 = Release|Any CPU
+		{2183F84C-6D16-4013-8885-B0AEAEAEC84C}.Release|x86.ActiveCfg = Release|Any CPU
+		{2183F84C-6D16-4013-8885-B0AEAEAEC84C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{89C5BF16-5682-4EF0-9DAC-0900F6A9770B} = {256F4E96-6A73-9ABE-786F-840C672A50F4}
+		{2183F84C-6D16-4013-8885-B0AEAEAEC84C} = {BD7290EE-2248-A724-C824-E1AA298D1C8A}
 	EndGlobalSection
 EndGlobal
