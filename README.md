@@ -1,20 +1,26 @@
-# Practica_U2_ED032026 — C#
+# Practica_U2_ED032026 — versión web
 
-Práctica de la Unidad II de Estructura de Datos: **12 ejercicios en C# con Windows Forms y .NET 10**. Incluye solución para Visual Studio, menú general y un proyecto independiente por estructura.
+Aplicación de los **12 ejercicios en C# con ASP.NET Core y .NET 10**, para usar desde el navegador. Esta es la rama `web`.
 
-## Abrir y ejecutar
+## Dos versiones
 
-Necesitas Windows y el SDK de .NET 10 para compilar. Abre `Practica_U2_ED032026.sln` en Visual Studio compatible con .NET 10 y la carga de trabajo de escritorio de .NET. Desde terminal:
+- [Rama escritorio](https://github.com/victormanuelxd360-afk/Practica_U2_ED032026/tree/escritorio): C# con Windows Forms, cuatro proyectos y ejecutables para Windows.
+- [Rama web](https://github.com/victormanuelxd360-afk/Practica_U2_ED032026/tree/web): servidor ASP.NET Core, interfaz adaptable al navegador y los mismos algoritmos C#.
+
+`main` conserva la versión base de escritorio. No se necesita mezclar las ramas para ejecutar cada versión.
+
+## Ejecutar la web
+
+Instala el SDK .NET 10. Funciona en Windows, Linux y macOS:
 
 ```powershell
-dotnet run --project CSharp/Practica.csproj -c Release
+git switch web
+dotnet run --project Web/PracticaWeb.csproj --urls http://localhost:5188
 ```
 
-Haz doble clic en `INICIAR.cmd` para iniciar el menú general. Las pestañas mantienen sus datos durante la sesión; el menú superior lleva a cada estructura.
+Abre http://localhost:5188 en el navegador. En Windows también puedes hacer doble clic en `INICIAR.cmd` o `INICIAR_WEB.cmd`. Mantén el servidor en ejecución mientras usas la página; Ctrl+C lo detiene. Puedes abrir `Practica_U2_Web.sln` en Visual Studio compatible con .NET 10.
 
-`COMPILAR_Y_PROBAR.cmd` compila, prueba y genera cuatro programas en `ejecutables`: General, Listas, Pilas y Colas. Los programas publicados requieren **.NET Desktop Runtime 10 para Windows**. Distribuye todos los archivos de cada carpeta, incluyendo EXE, DLL y JSON. También están disponibles en Releases de GitHub.
-
-## Ejercicios
+## Ejercicios incluidos
 
 | Estructura | Ejercicios |
 | --- | --- |
@@ -22,36 +28,35 @@ Haz doble clic en `INICIAR.cmd` para iniciar el menú general. Las pestañas man
 | Pilas | Invertir palabra; palíndromo; suma de números grandes; reemplazar valor |
 | Colas | Ventanilla de banco; juego de pintar coches; estacionamiento con cola circular doblemente ligada |
 
-Proyectos independientes:
+Los formularios validan datos faltantes, rangos, duplicados, sobreflujo y colas vacías. Dinero y calificaciones usan decimal; se admite punto o coma decimal. La suma usa pilas de dígitos; el estacionamiento usa nodos circulares doblemente ligados. El juego se actualiza cada segundo en pantalla y aumenta su velocidad cada tres coches pintados; termina al acumular cinco.
+
+## Arquitectura y sesiones
+
+- `Web/Program.cs`: API y estado por sesión con cookie HttpOnly y SameSite Strict.
+- `Web/wwwroot/`: interfaz HTML, CSS y JavaScript sin dependencias externas.
+- `CSharp/Modelos.cs`: algoritmos C# compartidos con escritorio, compilados en el proyecto web mediante referencia de fuentes.
+- `herramientas/probar-web.ps1`: integración HTTP de los doce ejercicios, errores y aislamiento de sesiones.
+- `pruebas-web.txt`: resultado real de las pruebas.
+- `evidencias-web/`: captura de la versión web en funcionamiento.
+
+Cada navegador tiene sus propias listas, colas, resultados y récord de juego. Se conservan al cambiar de ejercicio; se eliminan tras dos horas sin actividad, al cerrar la sesión del navegador, por límite de memoria o al reiniciar el servidor. No hay base de datos ni cuentas. El servidor mantiene hasta 1000 sesiones en caché; es una práctica académica, sin persistencia duradera. El récord web se conserva durante la sesión.
+
+Las carpetas CSharp, proyectos y legado-java conservan código de referencia. Los PDF y capturas de `documentacion/` y `evidencias-csharp/` corresponden a escritorio; no se presentan como evidencia web. Para desarrollar escritorio, cambia a la rama `escritorio`.
+
+## Compilar y probar
+
+En Windows con PowerShell:
 
 ```powershell
-dotnet run --project proyectos/Listas/Listas.csproj -c Release
-dotnet run --project proyectos/Pilas/Pilas.csproj -c Release
-dotnet run --project proyectos/Colas/Colas.csproj -c Release
+./COMPILAR_Y_PROBAR.cmd
 ```
 
-## Contenido y decisiones
+También puedes ejecutar `pwsh -File herramientas/probar-web.ps1`. Compila, inicia un servidor temporal en el puerto 5187, comprueba los ejercicios y detiene el proceso al terminar. GitHub Actions ejecuta estas verificaciones con cada push y pull request de esta rama.
 
-- `CSharp/Modelos.cs`: modelos, algoritmos y validaciones.
-- `CSharp/Program.cs`: interfaz Windows Forms, tablas y coches dibujados con GDI+.
-- `CSharp/Pruebas.cs`: pruebas de algoritmos, temporización y acciones reales de botones.
-- `proyectos/`: tres proyectos C# con fuentes compartidas mediante referencias Compile.
-- `pruebas-csharp.txt`: resultados reales de pruebas.
-- `evidencias-csharp/`: doce pantallas con datos procesados por los controles.
-- `documentacion/Documentacion_CSharp.pdf`: análisis, funcionamiento y capturas de C#.
-- `legado-java/`: versión anterior; sus capturas y documentación corresponden a Java.
+Publicación compilada:
 
-Dinero y calificaciones usan decimal, con punto o coma decimal; cantidades, turnos y valores de pila son enteros. Se validan faltantes, rangos, duplicados, colas llenas y vacías. La suma usa pilas de dígitos; BigInteger sólo aparece como oráculo en pruebas. El palíndromo ignora mayúsculas, espacios y signos, conservando acentos. Reemplazar sustituye viejo por nuevo sin alterar el orden.
+```powershell
+dotnet publish Web/PracticaWeb.csproj -c Release -o ejecutables-web
+```
 
-Banco: capacidad inicial 5, configurable sólo con cola vacía; frente y final muestran turnos, o -1 si está vacío. Juego: primer coche inmediato y siguientes cada 20 segundos; cada tres aciertos reduce el intervalo 2 segundos hasta un mínimo de 2; termina con cinco coches. Récord en `%LOCALAPPDATA%\Practica_U2_CSharp\record.txt`. Estacionamiento: nodos circulares doblemente ligados, salida FIFO y tarifa de $2.00 por segundo completo.
-
-## Equipo
-
-El repositorio es público; para editar directamente hay que aceptar la invitación como colaborador. GitHub Actions compila y prueba C# con cada push y pull request. Integrantes y grupo pendientes en `datos_portada.json`. Entrega del enunciado: 23 de octubre de 2026.
-
-## Ramas de la práctica
-
-- `escritorio`: aplicación C# con Windows Forms, para Windows.
-- `web`: aplicación C# con ASP.NET Core, para usar desde el navegador.
-
-Esta rama contiene la versión de escritorio.
+Para ejecutarla con ASP.NET Core Runtime 10, entra en `ejecutables-web` y ejecuta `dotnet PracticaWeb.dll --urls http://localhost:5188`. El repositorio contiene la aplicación; no incluye un despliegue público en un servicio de hosting.

@@ -1,0 +1,22 @@
+OK | Página web disponible
+OK | L1: escanear y retirar
+OK | L2: clasificación completa
+OK | L3: límite de aprobación
+OK | L4: orden y total decimal
+OK | L4: eliminar por clave
+OK | L5: grupos por letra
+OK | P1: invertir palabra
+OK | P2: palíndromo
+OK | P3: acarreo de mil dígitos
+OK | P4: reemplazar conservando el orden
+OK | C1: rechazar sobreflujo
+OK | C1: atención FIFO y cola vacía
+OK | C2: partida y coche inicial
+OK | C2: pintar el primer coche
+OK | C3: salida FIFO y recibo
+OK | Validación: nota fuera de rango
+OK | Validación: suma inválida
+OK | Validación: placas repetidas
+OK | Sesiones: datos separados por navegador
+OK | Solicitudes: cabecera requerida
+TOTAL: 21 verificaciones web correctas. Sin fallos.

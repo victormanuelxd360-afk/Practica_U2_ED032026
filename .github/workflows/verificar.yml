@@ -1,4 +1,4 @@
-name: Compilar y probar CSharp
+name: Compilar y probar web
 on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
@@ -10,13 +10,14 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
-      - name: Compilar cuatro proyectos y probar
+      - name: Verificar los doce ejercicios web y las sesiones
         shell: pwsh
-        run: ./herramientas/compilar.ps1
+        run: ./herramientas/probar-web.ps1
+      - name: Publicar binarios web
+        run: dotnet publish Web/PracticaWeb.csproj -c Release -o ejecutables-web
       - uses: actions/upload-artifact@v4
         with:
-          name: practica-csharp-ejecutables-y-pruebas
+          name: practica-web-y-pruebas
           path: |
-            ejecutables/
-            pruebas-csharp.txt
-            evidencias-csharp/
+            ejecutables-web/
+            pruebas-web.txt
