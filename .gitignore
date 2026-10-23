@@ -8,3 +8,9 @@ __pycache__/
 Thumbs.db
 .env
 .env.*
+**/bin/
+**/obj/
+ejecutables/
+*.zip
+.vs/
+/revision-csharp.png

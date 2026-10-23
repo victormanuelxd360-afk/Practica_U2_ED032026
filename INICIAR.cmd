@@ -1,11 +1,9 @@
 @echo off
 setlocal
 cd /d "%~dp0"
-where java >nul 2>nul
-if errorlevel 1 (
-  echo Se requiere Java 21 o posterior instalado y agregado al PATH.
-  pause
-  exit /b 1
+if exist "ejecutables\General\Practica_U2.exe" (
+  start "" "ejecutables\General\Practica_U2.exe"
+  exit /b 0
 )
-java -jar "Practica_U2.jar"
+dotnet run --project "CSharp\Practica.csproj" --configuration Release
 if errorlevel 1 pause
