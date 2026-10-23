@@ -1,0 +1,39 @@
+name: Publicar web en GitHub Pages
+on:
+  push:
+    branches: [web]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  compilar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Preparar interfaz compartida
+        shell: pwsh
+        run: ./herramientas/preparar-publica.ps1
+      - name: Compilar CSharp para el navegador
+        run: dotnet publish WebPublica/PracticaPublica.csproj -c Release -o publicacion-pages
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: publicacion-pages/wwwroot
+  desplegar:
+    needs: compilar
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v4

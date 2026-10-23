@@ -10,7 +10,7 @@ const modules = [
 ['P3','Pilas','Suma de números grandes','Suma enteros no negativos dígito a dígito mediante pilas. Sin límite fijo de dígitos.',[['a','Primer número','999999999999999999999'],['b','Segundo número','1']],[['sumar','Sumar números']]],
 ['P4','Pilas','Reemplazar valor','Sustituye cada aparición del valor viejo sin cambiar el orden de los demás elementos.',[['valores','Valores separados por comas','1,2,3,2'],['viejo','Valor viejo','2'],['nuevo','Valor nuevo','9']],[['reemplazar','Reemplazar']]],
 ['C1','Colas','Ventanilla de banco','El primero en llegar es el primero en ser atendido. Consulta turnos y tiempos de espera.',[['nombre','Nombre del cliente',''],['movimiento','Movimiento',['Pago de servicio','Depósito','Retiro','Compra de tiempo-aire','Consulta de saldo']],['capacidad','Capacidad (con cola vacía)','5']],[['agregar','Agregar a la cola'],['atender','Atender en ventanilla'],['configurar','Configurar capacidad']]],
-['C2','Colas','Juego de pintar coches','Pinta el primer coche con el color solicitado. Llegan cada 20 segundos; la velocidad aumenta cada tres aciertos. Pierdes al acumular cinco.',[],[['iniciar','Iniciar partida'],['pintar','Rojo'],['pintar','Azul'],['pintar','Verde'],['pintar','Amarillo'],['pintar','Naranja']]],
+['C2','Colas','Juego de pintar coches','Pinta el primer coche con el color solicitado. Empiezan llegando cada 20 segundos; cada acierto reduce 2 segundos el intervalo, hasta un mínimo de 2. Pierdes al acumular cinco.',[],[['iniciar','Iniciar partida'],['pintar','Rojo'],['pintar','Azul'],['pintar','Verde'],['pintar','Amarillo'],['pintar','Naranja']]],
 ['C3','Colas','Estacionamiento de autos','Una cola circular doblemente ligada sin cupo fijo. Sale el primero que entró; tarifa de $2.00 por segundo completo.',[['placas','Placas del auto',''],['propietario','Nombre del propietario','']],[['entrar','Entrada de auto'],['salir','Salida de auto']]]
 ];
 const $ = id => document.getElementById(id);
@@ -28,6 +28,15 @@ const title = text => `<h4>${escape(text)}</h4>`;
 const chips = list => list.length ? `<div class="chips">${list.map(x=>`<span class="chip">${escape(x)}</span>`).join('')}</div>` : empty('Sin elementos.');
 const metrics = entries => `<div class="metrics">${entries.map(([n,label])=>`<div class="metric"><strong>${escape(n)}</strong><span>${escape(label)}</span></div>`).join('')}</div>`;
 const productCols = [['clave','Clave'],['nombre','Producto'],['cantidad','Cantidad'],['precio','Precio',money]];
+async function readState(){
+ if(window.practicaMotorReady)return (await window.practicaMotorReady).read();
+ const response=await fetch('/api/estado');if(!response.ok)throw Error('No se pudo conectar con el servidor.');return response.json();
+}
+async function sendAction(solicitud){
+ if(window.practicaMotorReady)return (await window.practicaMotorReady).action(solicitud);
+ const response=await fetch('/api/accion',{method:'POST',headers:{'Content-Type':'application/json','X-Practica':'1'},body:JSON.stringify(solicitud)});
+ const data=await response.json();if(!response.ok)throw Error(data.error||'No se pudo realizar la operación.');return data;
+}
 function render(){
  if(!state) return;
  const d = state[selected[0].toLowerCase()];
@@ -63,16 +72,15 @@ async function act(action,label){
  const values=Object.fromEntries(new FormData($('form')));if(modulo==='C2'&&action==='pintar')values.color=label;
  document.querySelectorAll('#actions button,nav button').forEach(b=>b.disabled=true);
  try{
-  const response=await fetch('/api/accion',{method:'POST',headers:{'Content-Type':'application/json','X-Practica':'1'},body:JSON.stringify({modulo,accion:action,valores:values})});
-  const data=await response.json();if(!response.ok)throw Error(data.error||'No se pudo realizar la operación.');
+  const data=await sendAction({modulo,accion:action,valores:values});
   state=data.estado;$('status').className='';$('status').textContent=data.mensaje;render();
  }catch(e){$('status').className='error';$('status').textContent=e.message;}
  finally{busy=false;document.querySelectorAll('#actions button,nav button').forEach(b=>b.disabled=false);}
 }
 async function refresh(){
  if(busy)return;
- try{const response=await fetch('/api/estado');if(!response.ok)throw Error('No se pudo conectar con el servidor.');state=await response.json();render();}
- catch(e){$('status').className='error';$('status').textContent='No se pudo conectar con el servidor. Verifica que siga ejecutándose.';}
+ try{state=await readState();render();}
+ catch(e){$('status').className='error';$('status').textContent=window.practicaMotorReady?'No se pudo cargar el motor C#. Recarga la página y comprueba tu conexión.':'No se pudo conectar con el servidor. Verifica que siga ejecutándose.';}
 }
 let category='';
 for(const m of modules){if(m[1]!==category){category=m[1];const h=document.createElement('div');h.className='group-title';h.textContent=category.toUpperCase();$('menu').append(h);}const b=document.createElement('button');b.type='button';b.dataset.id=m[0];b.textContent=`${m[0].slice(1)}. ${m[2]}`;b.addEventListener('click',()=>choose(m));$('menu').append(b);}

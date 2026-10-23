@@ -1,0 +1,15 @@
+**/bin
+**/obj
+.git
+.env
+.env.*
+.vs
+.idea
+legado-java
+ejecutables
+ejecutables-web
+output
+*.zip
+*.rar
+evidencias*
+revision-csharp.png

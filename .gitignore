@@ -16,3 +16,8 @@ ejecutables/
 /revision-csharp.png
 
 ejecutables-web/
+
+ejecutables-web-portable/
+publicacion-pages/
+paquete-entrega/
+.railway/

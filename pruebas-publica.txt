@@ -1,0 +1,14 @@
+OK | L1: controles y resultado C# WebAssembly
+OK | L2: controles y resultado C# WebAssembly
+OK | L3: controles y resultado C# WebAssembly
+OK | L4: controles y resultado C# WebAssembly
+OK | L5: controles y resultado C# WebAssembly
+OK | P1: controles y resultado C# WebAssembly
+OK | P2: controles y resultado C# WebAssembly
+OK | P3: controles y resultado C# WebAssembly
+OK | P4: controles y resultado C# WebAssembly
+OK | C1: controles y resultado C# WebAssembly
+OK | C2: controles y resultado C# WebAssembly
+OK | Dificultad: el primer acierto reduce 20 a 18 segundos
+OK | C3: controles y resultado C# WebAssembly
+TOTAL: 12 ejercicios web verificados en navegador; dificultad progresiva comprobada.

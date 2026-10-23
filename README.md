@@ -28,7 +28,7 @@ Abre http://localhost:5188 en el navegador. En Windows también puedes hacer dob
 | Pilas | Invertir palabra; palíndromo; suma de números grandes; reemplazar valor |
 | Colas | Ventanilla de banco; juego de pintar coches; estacionamiento con cola circular doblemente ligada |
 
-Los formularios validan datos faltantes, rangos, duplicados, sobreflujo y colas vacías. Dinero y calificaciones usan decimal; se admite punto o coma decimal. La suma usa pilas de dígitos; el estacionamiento usa nodos circulares doblemente ligados. El juego se actualiza cada segundo en pantalla y aumenta su velocidad cada tres coches pintados; termina al acumular cinco.
+Los formularios validan datos faltantes, rangos, duplicados, sobreflujo y colas vacías. Dinero y calificaciones usan decimal; se admite punto o coma decimal. La suma usa pilas de dígitos; el estacionamiento usa nodos circulares doblemente ligados. El juego se actualiza cada segundo en pantalla y reduce 2 segundos el intervalo con cada coche pintado, hasta un mínimo de 2 segundos; termina al acumular cinco.
 
 ## Arquitectura y sesiones
 
@@ -59,4 +59,14 @@ Publicación compilada:
 dotnet publish Web/PracticaWeb.csproj -c Release -o ejecutables-web
 ```
 
-Para ejecutarla con ASP.NET Core Runtime 10, entra en `ejecutables-web` y ejecuta `dotnet PracticaWeb.dll --urls http://localhost:5188`. El repositorio contiene la aplicación; no incluye un despliegue público en un servicio de hosting.
+Para ejecutarla con ASP.NET Core Runtime 10, entra en `ejecutables-web` y ejecuta `dotnet PracticaWeb.dll --urls http://localhost:5188`. La versión pública funciona en GitHub Pages: https://victormanuelxd360-afk.github.io/Practica_U2_ED032026/ .
+
+## Web pública independiente de esta computadora
+
+La URL pública es https://victormanuelxd360-afk.github.io/Practica_U2_ED032026/ . La carpeta `WebPublica` compila los mismos modelos y controladores de ejercicios a C# WebAssembly, de modo que los doce ejercicios funcionan en el navegador sin un servidor ASP.NET encendido. GitHub Actions publica automáticamente los cambios de la rama web.
+
+En la versión pública, las listas se conservan al cambiar de ejercicio y se reinician al recargar la página; el récord se guarda en el almacenamiento local del navegador. La versión ASP.NET sigue disponible en `Web`, con sesiones de servidor.
+
+El juego comienza con un coche inmediato y un intervalo de 20 segundos. Cada coche pintado reduce el intervalo 2 segundos (20, 18, 16, ...), hasta un mínimo de 2 segundos. Sólo se puede pintar el frente y el juego termina con cinco coches en cola.
+
+Para compilar la versión pública: ejecuta `herramientas/preparar-publica.ps1` y después `dotnet publish WebPublica/PracticaPublica.csproj -c Release -o publicacion-pages`. El contenido de `publicacion-pages/wwwroot` se puede alojar como sitio estático. `Dockerfile` y `railway.json` quedan disponibles para quien prefiera alojar la variante ASP.NET en un servidor propio.

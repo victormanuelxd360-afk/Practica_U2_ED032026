@@ -13,10 +13,11 @@ OK | C1: rechazar sobreflujo
 OK | C1: atención FIFO y cola vacía
 OK | C2: partida y coche inicial
 OK | C2: pintar el primer coche
+OK | C2: el primer acierto reduce el intervalo a 18 segundos
 OK | C3: salida FIFO y recibo
 OK | Validación: nota fuera de rango
 OK | Validación: suma inválida
 OK | Validación: placas repetidas
 OK | Sesiones: datos separados por navegador
 OK | Solicitudes: cabecera requerida
-TOTAL: 21 verificaciones web correctas. Sin fallos.
+TOTAL: 22 verificaciones web correctas. Sin fallos.
