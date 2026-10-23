@@ -48,3 +48,10 @@ Banco: capacidad inicial 5, configurable sólo con cola vacía; frente y final m
 ## Equipo
 
 El repositorio es público; para editar directamente hay que aceptar la invitación como colaborador. GitHub Actions compila y prueba C# con cada push y pull request. Integrantes y grupo pendientes en `datos_portada.json`. Entrega del enunciado: 23 de octubre de 2026.
+
+## Ramas de la práctica
+
+- `escritorio`: aplicación C# con Windows Forms, para Windows.
+- `web`: aplicación C# con ASP.NET Core, para usar desde el navegador.
+
+Esta rama contiene la versión de escritorio.
