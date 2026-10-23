@@ -208,7 +208,7 @@ public sealed class Juego
     public long TiempoRecord { get; set; }
     public long Inicio, Fin, ProximaLlegada;
     private int secuencia;
-    public long Intervalo => Math.Max(2000, 20000 - Pintados / 3 * 2000L);
+    public long Intervalo => Math.Max(2000, 20000 - Pintados * 2000L);
     private void Encolar() => Coches.InsertaCola(new Coche(++secuencia, (ColorAuto)Random.Shared.Next(5)));
     public void Iniciar(long ahora)
     { while (!Coches.ColaVacia()) Coches.EliminaCola(); Pintados = secuencia = 0; Inicio = Fin = ahora; Activo = true; Encolar(); ProximaLlegada = ahora + Intervalo; }
@@ -228,7 +228,7 @@ public sealed class Juego
         if (Coches.ColaVacia()) throw new ArgumentException("Espera al siguiente coche.");
         if (Coches.Frente().Color != color) throw new ArgumentException("Color incorrecto: pinta el primer coche de la cola.");
         Coches.EliminaCola(); Pintados++;
-        if (Pintados % 3 == 0) ProximaLlegada = Math.Min(ProximaLlegada, ahora + Intervalo);
+        ProximaLlegada = Math.Min(ProximaLlegada, ahora + Intervalo);
         GuardarRecord(ahora);
     }
     public long Transcurrido(long ahora) => Math.Max(0, ((Activo ? ahora : Fin) - Inicio) / 1000);
