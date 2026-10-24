@@ -27,16 +27,26 @@ public static class Pruebas
             Stack<int> pila = new([1, 2, 3, 2]); Verificar(Algoritmos.Reemplazar(pila, 9, 2) == 2 && pila.SequenceEqual([9, 3, 9, 1]), "P4: reemplaza y conserva orden"); Verificar(Algoritmos.Reemplazar(new Stack<int>(), 9, 2) == 0, "P4: pila vacía");
             DateTime t = new(2026, 10, 22, 12, 0, 0); Banco banco = new(2); Rechaza(() => banco.Atender(t), "C1: cola vacía"); banco.Llegar("Ana", "Depósito", t); banco.Llegar("Luis", "Retiro", t.AddSeconds(2)); Rechaza(() => banco.Llegar("Eva", "Retiro", t), "C1: sobreflujo"); Verificar(banco.Clientes.Frente().Turno == 1 && banco.Clientes.Final().Turno == 2 && banco.Atender(t.AddSeconds(18)).Segundos == 18, "C1: FIFO, frente, final y espera");
             Juego juego = new(); juego.Iniciar(0); juego.Actualizar(19999); Verificar(juego.Coches.Count == 1, "C2: no llega antes de veinte segundos"); juego.Actualizar(20000); Verificar(juego.Coches.Count == 2, "C2: llegada exacta a veinte segundos");
-            var correcto = juego.Coches.Frente().Color; Rechaza(() => juego.Pintar((ColorAuto)(((int)correcto + 1) % 5), 20001), "C2: color incorrecto"); juego.Pintar(correcto, 20002); juego.Pintar(juego.Coches.Frente().Color, 20003); juego.Actualizar(40000); juego.Pintar(juego.Coches.Frente().Color, 40001); Verificar(juego.Intervalo == 18000 && juego.Record == 3 && juego.TiempoRecord == 40, "C2: aceleración y récord"); juego.Iniciar(0); juego.Actualizar(80000); Verificar(!juego.Activo && juego.Coches.Count == 5 && juego.Transcurrido(90000) == 80, "C2: fin con cinco coches y reloj detenido");
+            var correcto = juego.Coches.Frente().Color; Rechaza(() => juego.Pintar((ColorAuto)(((int)correcto + 1) % 5), 20001), "C2: color incorrecto"); juego.Pintar(correcto, 20002); Verificar(juego.Atendido?.Color == correcto && juego.Atendido.Numero == 1, "C2: coche atendido queda pintado con su color"); juego.Pintar(juego.Coches.Frente().Color, 20003); juego.Actualizar(40000); juego.Pintar(juego.Coches.Frente().Color, 40001); Verificar(juego.Intervalo == 18000 && juego.Record == 3 && juego.TiempoRecord == 40, "C2: aceleración y récord"); juego.Iniciar(0); juego.Actualizar(80000); Verificar(!juego.Activo && juego.Coches.Count == 5 && juego.Transcurrido(90000) == 80, "C2: fin con cinco coches y reloj detenido");
             ColaCircularDoblementeLigada parking = new(); Rechaza(() => parking.Salir(t), "C3: estacionamiento vacío"); parking.Insertar("abc", "Ana", t); parking.Insertar("xyz", "Luis", t); Rechaza(() => parking.Insertar("ABC", "Otra", t), "C3: placas únicas"); var recibo = parking.Salir(t.AddSeconds(30)); Verificar(recibo.Auto.Placas == "ABC" && recibo.Costo == 60 && parking.EnlacesValidos(), "C3: FIFO, cobro y enlaces"); parking.Salir(t);
             bool enlaces = true; for (int i = 0; i < 1000; i++) parking.Insertar($"P{i}", "Dueño", t); for (int i = 0; i < 1000; i++) enlaces &= parking.EnlacesValidos() && parking.Salir(t).Auto.Placas == $"P{i}"; Verificar(enlaces && parking.EnlacesValidos() && parking.Count == 0, "C3: mil nodos, circularidad y eliminación del último");
             Verificar(Validar.Decimal("8,5", 0, 10) == 8.5m, "Validación: coma decimal"); Rechaza(() => Validar.Entero("2.5"), "Validación: entero"); Rechaza(() => Validar.Texto(" "), "Validación: faltantes");
-            using Ventana ventana = new(); Verificar(ventana.Modulos.Count == 12, "Interfaz: doce ejercicios");
-            var modulo = ventana.Modulos[0]; modulo.Campos.Controls.OfType<Button>().First().PerformClick();
+            using frmPractica frm = new() { Automatico = true }; Verificar(frm.Modulos.Count == 12, "Interfaz: doce ejercicios");
+            // Convención de nombres del enunciado: prefijo por tipo de control (btn, txt, lbl...) y nombres únicos.
+            string[] prefijos = ["btn", "txt", "lbl", "cbo", "dgv", "pnl", "flp", "tab", "mnu"];
+            IEnumerable<Control> Todos(Control c) => c is DataGridView ? [] : c.Controls.Cast<Control>().SelectMany(h => Todos(h).Prepend(h));
+            List<string> nombres = Todos(frm).Select(c => c.Name).Concat(frm.MainMenuStrip!.Items.Cast<ToolStripItem>().Select(i => i.Name ?? "")).ToList();
+            Verificar(frm.Name == "frmPractica" && nombres.All(n => prefijos.Any(n.StartsWith)) && nombres.Distinct().Count() == nombres.Count, "Interfaz: nombres con prefijo y únicos");
+            var modulo = frm.Modulos[0]; modulo.Campos.Controls.OfType<Button>().First().PerformClick();
             // Los botones se ejecutan con el formulario visible para validar el flujo real.
-            ventana.Show(); Application.DoEvents(); modulo.Campos.Controls.OfType<Button>().First().PerformClick(); Verificar(modulo.Resultado.Text.Contains("producto1"), "Interfaz L1: botón escanear"); ventana.Hide();
-            ventana.GuardarEvidencias();
-            foreach (var m in ventana.Modulos) Verificar(m.Resultado.Text.Length > 0 && m.Estado.ForeColor != Color.Firebrick, "Interfaz: flujo completo " + m.Text);
+            frm.Show(); Application.DoEvents(); modulo.Control<Button>("btnEscanear").PerformClick(); Verificar(modulo.Resultado.Text.Contains("producto1"), "Interfaz L1: botón escanear"); frm.Hide();
+            frm.GuardarEvidencias();
+            foreach (var m in frm.Modulos) Verificar(m.Resultado.Text.Length > 0 && m.Estado.ForeColor != Color.Firebrick, "Interfaz: flujo completo " + m.Text);
+            string Mensaje(string titulo) => frm.Mensajes.Single(x => x.StartsWith(titulo + ":"));
+            var formados = frm.Mensajes.Where(x => x.StartsWith("SE AGREGA UN CLIENTE AL FINAL DE LA COLA:")).ToList();
+            Verificar(formados.Count == 2 && formados[0].Contains("No Turno: 1") && formados[0].Contains("Nombre: Ana") && formados[1].Contains("Nombre: Luis"), "Interfaz C1: ventana al formar cliente");
+            Verificar(Mensaje("TIEMPO DE ESPERA EN LA COLA").Contains("Cliente atendido: Ana"), "Interfaz C1: ventana con tiempo de espera");
+            Verificar(frm.Mensajes.Count(x => x.StartsWith("ENTRADA DE AUTO:")) == 2 && Mensaje("SALIDA DE AUTO").Contains("Placas: ABC-123") && Mensaje("SALIDA DE AUTO").Contains("Total: $"), "Interfaz C3: confirmación de entrada y recibo de salida");
             log.Add($"TOTAL: {n} verificaciones correctas. Sin fallos.");
             File.WriteAllLines("pruebas-csharp.txt", log); return 0;
         }

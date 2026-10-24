@@ -43,7 +43,11 @@ dotnet run --project proyectos/Colas/Colas.csproj -c Release
 
 Dinero y calificaciones usan decimal, con punto o coma decimal; cantidades, turnos y valores de pila son enteros. Se validan faltantes, rangos, duplicados, colas llenas y vacías. La suma usa pilas de dígitos; BigInteger sólo aparece como oráculo en pruebas. El palíndromo ignora mayúsculas, espacios y signos, conservando acentos. Reemplazar sustituye viejo por nuevo sin alterar el orden.
 
-Banco: capacidad inicial 5, configurable sólo con cola vacía; frente y final muestran turnos, o -1 si está vacío. Juego: primer coche inmediato y siguientes cada 20 segundos; cada tres aciertos reduce el intervalo 2 segundos hasta un mínimo de 2; termina con cinco coches. Récord en `%LOCALAPPDATA%\Practica_U2_CSharp\record.txt`. Estacionamiento: nodos circulares doblemente ligados, salida FIFO y tarifa de $2.00 por segundo completo.
+Los objetos siguen la convención del enunciado: el formulario es `frmPractica` y cada control lleva prefijo por tipo (`btnRetirar`, `txtClaveRetiro`, `lblEstadoL1`, `dgvTablaC1`, `cboMovimiento`, `pnlCoches`, `tabC2`, `mnuSalir`); las pruebas verifican prefijos y nombres únicos.
+
+Banco: capacidad inicial 5, configurable sólo con cola vacía; muestra el siguiente No. Turno, y frente y final muestran turnos, o -1 si está vacío. Al formar un cliente aparece la ventana "SE AGREGA UN CLIENTE AL FINAL DE LA COLA" y al atenderlo "TIEMPO DE ESPERA EN LA COLA"; "Salida del sistema" cierra la aplicación. Juego: primer coche inmediato y siguientes cada 20 segundos; cada tres aciertos reduce el intervalo 2 segundos hasta un mínimo de 2; termina con cinco coches. Los coches esperan sin pintar con una etiqueta del color pedido, la paleta son botones coloreados y el coche atendido se muestra pintado. Récord en `%LOCALAPPDATA%\Practica_U2_CSharp\record.txt`. Estacionamiento: nodos circulares doblemente ligados, salida FIFO y tarifa de $2.00 por segundo completo; la entrada se confirma con un mensaje y la salida muestra el recibo en una ventana.
+
+En pruebas y capturas (`--probar`) los mensajes se registran sin abrir ventanas modales y no se modifica el récord del usuario.
 
 ## Equipo
 

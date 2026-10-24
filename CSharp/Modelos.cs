@@ -150,6 +150,7 @@ public sealed class Banco(int capacidad)
 {
     public Cola<Cliente> Clientes { get; } = new(capacidad);
     private int turno;
+    public int SiguienteTurno => turno + 1;
     public Cliente Llegar(string nombre, string movimiento, DateTime ahora)
     {
         if (Clientes.ColaLlena()) throw new ArgumentException("La cola está llena.");
@@ -172,7 +173,7 @@ public sealed class ColaCircularDoblementeLigada
         List<Auto> lista = []; if (frente is null) return lista;
         Nodo n = frente; do { lista.Add(n.Auto); n = n.Siguiente; } while (n != frente); return lista;
     }
-    public void Insertar(string placas, string propietario, DateTime ahora)
+    public Auto Insertar(string placas, string propietario, DateTime ahora)
     {
         string p = Validar.Texto(placas).ToUpperInvariant();
         if (Lista().Any(a => a.Placas == p)) throw new ArgumentException("Las placas ya están registradas.");
@@ -180,6 +181,7 @@ public sealed class ColaCircularDoblementeLigada
         if (frente is null) { n.Anterior = n.Siguiente = n; frente = n; }
         else { Nodo ultimo = frente.Anterior; n.Anterior = ultimo; n.Siguiente = frente; ultimo.Siguiente = n; frente.Anterior = n; }
         Count++;
+        return n.Auto;
     }
     public Recibo Salir(DateTime ahora)
     {
@@ -204,6 +206,7 @@ public sealed class Juego
     public Cola<Coche> Coches { get; } = new(5);
     public bool Activo { get; private set; }
     public int Pintados { get; private set; }
+    public Coche? Atendido { get; private set; }
     public int Record { get; set; }
     public long TiempoRecord { get; set; }
     public long Inicio, Fin, ProximaLlegada;
@@ -211,7 +214,7 @@ public sealed class Juego
     public long Intervalo => Math.Max(2000, 20000 - Pintados / 3 * 2000L);
     private void Encolar() => Coches.InsertaCola(new Coche(++secuencia, (ColorAuto)Random.Shared.Next(5)));
     public void Iniciar(long ahora)
-    { while (!Coches.ColaVacia()) Coches.EliminaCola(); Pintados = secuencia = 0; Inicio = Fin = ahora; Activo = true; Encolar(); ProximaLlegada = ahora + Intervalo; }
+    { while (!Coches.ColaVacia()) Coches.EliminaCola(); Atendido = null; Pintados = secuencia = 0; Inicio = Fin = ahora; Activo = true; Encolar(); ProximaLlegada = ahora + Intervalo; }
     public void Actualizar(long ahora)
     {
         while (Activo && ahora >= ProximaLlegada)
@@ -227,7 +230,7 @@ public sealed class Juego
         if (!Activo) throw new ArgumentException("Inicia una partida. El juego termina con cinco coches.");
         if (Coches.ColaVacia()) throw new ArgumentException("Espera al siguiente coche.");
         if (Coches.Frente().Color != color) throw new ArgumentException("Color incorrecto: pinta el primer coche de la cola.");
-        Coches.EliminaCola(); Pintados++;
+        Atendido = Coches.EliminaCola(); Pintados++;
         if (Pintados % 3 == 0) ProximaLlegada = Math.Min(ProximaLlegada, ahora + Intervalo);
         GuardarRecord(ahora);
     }
