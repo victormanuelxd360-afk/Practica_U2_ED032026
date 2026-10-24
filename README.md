@@ -41,7 +41,7 @@ Los formularios validan datos faltantes, rangos, duplicados, sobreflujo y colas 
 
 Cada navegador tiene sus propias listas, colas, resultados y récord de juego. Se conservan al cambiar de ejercicio; se eliminan tras dos horas sin actividad, al cerrar la sesión del navegador, por límite de memoria o al reiniciar el servidor. No hay base de datos ni cuentas. El servidor mantiene hasta 1000 sesiones en caché; es una práctica académica, sin persistencia duradera. El récord web se conserva durante la sesión.
 
-Las carpetas CSharp, proyectos y legado-java conservan código de referencia. Los PDF y capturas de `documentacion/` y `evidencias-csharp/` corresponden a escritorio; no se presentan como evidencia web. Para desarrollar escritorio, cambia a la rama `escritorio`.
+Las carpetas CSharp, proyectos y legado-java conservan código de referencia. `documentacion/Documentacion_WEB.pdf` y `evidencias-web/` corresponden a la versión web. `documentacion/Documentacion_CSharp.pdf` y `evidencias-csharp/` corresponden a escritorio. Para desarrollar escritorio, cambia a la rama `escritorio`.
 
 ## Compilar y probar
 
@@ -60,6 +60,12 @@ dotnet publish Web/PracticaWeb.csproj -c Release -o ejecutables-web
 ```
 
 Para ejecutarla con ASP.NET Core Runtime 10, entra en `ejecutables-web` y ejecuta `dotnet PracticaWeb.dll --urls http://localhost:5188`. La versión pública funciona en GitHub Pages: https://victormanuelxd360-afk.github.io/Practica_U2_ED032026/ .
+
+## Documento para entregar y exponer
+
+`documentacion/Documentacion_WEB.pdf` contiene 50 páginas con la portada enviada por el equipo, grupo 4.º A, los cuatro integrantes y el apellido **Almendarez**, con Z. Conserva el desarrollo y las evidencias, y añade la explicación de clases, métodos, estructuras, fragmentos reales de código, recorridos con datos y una guía para la exposición de los doce ejercicios. El mapa final permite localizar los métodos por su línea de inicio en el código.
+
+La fuente de la portada es `documentacion/Portada_equipo.png`. Los datos editables están en `datos_portada.json`. Para regenerar la documentación, ejecuta `python herramientas/generar_documentacion_web.py` con Python, reportlab, Pillow y pypdf en Windows. El script conserva el desarrollo inicial y reemplaza la guía anterior al regenerar, para evitar duplicarla.
 
 ## Web pública independiente de esta computadora
 

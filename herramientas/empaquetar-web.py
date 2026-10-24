@@ -21,9 +21,9 @@ def copiar(origen, destino=None):
 for carpeta in ('Web', 'WebPublica', 'evidencias-web'):
     copiar(carpeta)
 copiar('CSharp/Modelos.cs')
-for archivo in ('Practica_U2_Web.sln', 'README.md', 'datos_portada.json', 'Dockerfile', '.dockerignore', 'railway.json', 'pruebas-web.txt', 'pruebas-publica.txt', 'documentacion/Documentacion_WEB.pdf', 'documentacion/Enunciado_original.pdf'):
+for archivo in ('Practica_U2_Web.sln', 'README.md', 'datos_portada.json', 'Dockerfile', '.dockerignore', 'railway.json', 'pruebas-web.txt', 'pruebas-publica.txt', 'documentacion/Documentacion_WEB.pdf', 'documentacion/Portada_equipo.png', 'documentacion/Enunciado_original.pdf'):
     copiar(archivo)
-for archivo in ('probar-web.ps1', 'preparar-publica.ps1', 'generar_documentacion_web.py', 'generar_documentacion_csharp.py', 'empaquetar-web.py'):
+for archivo in ('probar-web.ps1', 'preparar-publica.ps1', 'generar_documentacion_web.py', 'ampliar_documentacion_web.py', 'contenido_codigo_web.py', 'generar_documentacion_csharp.py', 'empaquetar-web.py'):
     copiar('herramientas/' + archivo)
 copiar('ejecutables-web-portable', 'Publicacion')
 
@@ -60,9 +60,12 @@ try {
 4. Informe de entrega: documentacion/Documentacion_WEB.pdf.
 5. Evidencias y resultados: evidencias-web/publica, pruebas-web.txt y pruebas-publica.txt.
 
-IMPORTANTE: los integrantes y el grupo están pendientes porque no se proporcionaron.
-Complétalos en datos_portada.json y regenera el informe antes de la entrega formal.
-La generación del PDF requiere Python con reportlab y Pillow en Windows.
+PORTADA: se incorporó la imagen entregada por el equipo, con los cuatro integrantes
+y grupo 4.º A. Los datos editables están en datos_portada.json.
+El informe tiene 50 páginas: desarrollo y evidencias, explicación de métodos,
+fragmentos reales de C#, recorridos de ejecución y guía de exposición.
+Para regenerarlo: python herramientas/generar_documentacion_web.py.
+Requiere Python con reportlab, Pillow y pypdf en Windows.
 
 JUEGO: cada coche pintado reduce dos segundos el intervalo de llegada,
 desde 20 segundos hasta un mínimo de 2. Finaliza al acumular cinco coches.
