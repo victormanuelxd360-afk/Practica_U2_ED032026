@@ -208,7 +208,10 @@ public sealed class Juego
     public long TiempoRecord { get; set; }
     public long Inicio, Fin, ProximaLlegada;
     private int secuencia;
-    public long Intervalo => Math.Max(2000, 20000 - Pintados * 2000L);
+    // Dificultad por niveles: los cinco primeros aciertos son fáciles,
+    // los tres siguientes son intermedios y después comienza el modo mega difícil.
+    public long Intervalo => Pintados < 5 ? 20000 : Pintados < 8 ? 10000 : 2000;
+    public string Dificultad => Pintados < 5 ? "Fácil" : Pintados < 8 ? "Media" : "Mega difícil";
     private void Encolar() => Coches.InsertaCola(new Coche(++secuencia, (ColorAuto)Random.Shared.Next(5)));
     public void Iniciar(long ahora)
     { while (!Coches.ColaVacia()) Coches.EliminaCola(); Pintados = secuencia = 0; Inicio = Fin = ahora; Activo = true; Encolar(); ProximaLlegada = ahora + Intervalo; }

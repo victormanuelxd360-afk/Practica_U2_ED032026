@@ -73,6 +73,6 @@ La URL pública es https://victormanuelxd360-afk.github.io/Practica_U2_ED032026/
 
 En la versión pública, las listas se conservan al cambiar de ejercicio y se reinician al recargar la página; el récord se guarda en el almacenamiento local del navegador. La versión ASP.NET sigue disponible en `Web`, con sesiones de servidor.
 
-El juego comienza con un coche inmediato y un intervalo de 20 segundos. Cada coche pintado reduce el intervalo 2 segundos (20, 18, 16, ...), hasta un mínimo de 2 segundos. Sólo se puede pintar el frente y el juego termina con cinco coches en cola.
+El juego comienza con un coche inmediato y un intervalo de 20 segundos. Los primeros 5 coches usan 20 s; los coches 6 a 8 usan 10 s; desde el coche 9 el intervalo es de 2 s. Sólo se puede pintar el frente y el juego termina con cinco coches en cola.
 
 Para compilar la versión pública: ejecuta `herramientas/preparar-publica.ps1` y después `dotnet publish WebPublica/PracticaPublica.csproj -c Release -o publicacion-pages`. El contenido de `publicacion-pages/wwwroot` se puede alojar como sitio estático. `Dockerfile` y `railway.json` quedan disponibles para quien prefiera alojar la variante ASP.NET en un servidor propio.

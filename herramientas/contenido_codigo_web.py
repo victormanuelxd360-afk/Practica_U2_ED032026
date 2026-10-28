@@ -167,7 +167,7 @@ dict(id='C1', titulo='Ventanilla de banco', clase='Cola<T>, Cliente y Banco',
         (long)(ahora - c.Llegada).TotalSeconds));
 }''',
  pasos=['El usuario elige el movimiento en el selector y escribe el nombre. Estado sólo permite uno de los movimientos ofrecidos por la pantalla.', 'Al agregar, el cliente recibe un turno y DateTime.Now como hora de llegada. La tabla se actualiza y el cliente se forma al final.', 'Atender retira automáticamente el primer cliente; no pide un turno para elegir a alguien intermedio. Se muestran su nombre y su espera.', 'Después de cada operación se actualizan frente y final. Si la cola queda vacía, la pantalla usa -1 como indicador. La capacidad sólo se puede cambiar con la cola vacía.'],
- tabla=[['Evento','Cola: frente a final','Efecto'],['Ana llega a las 12:00:00','Ana, turno 1','Frente y final = 1'],['Luis llega a las 12:00:02','Ana, Luis','Frente 1; final 2'],['Atender a las 12:00:18','Luis','Ana esperó 18 segundos']],
+ tabla=[['Evento','Cola: frente a final','Efecto'],['Ana llega a las 12:00:00','Ana, turno 1','Frente y final = 1'],['Luis llega a las 12:00:02','Ana, Luis','Frente 1; final 2'],['Atender a las 12:00:18','Luis','Ana esperó 20 segundos']],
  errores='La cola llena impide nuevas inserciones y la vacía impide atender. Se rechazan nombres faltantes, movimientos ajenos al selector y cambios de capacidad con clientes pendientes. Math.Max evita mostrar tiempos negativos.',
  oral='La cola impone el orden de atención. Agregar utiliza el final y atender utiliza el frente. La espera se calcula con las horas guardadas, no con una cantidad inventada por la interfaz.'),
 
@@ -183,7 +183,7 @@ ProximaLlegada = Math.Min(ProximaLlegada,
     ahora + Intervalo);
 GuardarRecord(ahora);''',
  pasos=['Al iniciar aparece un coche. Si nadie pinta, llegan otros a los 20, 40, 60 y 80 segundos; al quinto coche termina la partida.', 'Al acertar el color, el frente sale y el marcador aumenta. Si era el primer acierto, Intervalo cambia de 20000 a 18000 milisegundos.', 'Math.Min conserva la llegada que ocurra antes: la ya programada o ahora + el intervalo reducido. Acertar nunca retrasa una llegada que ya estaba próxima.', 'El segundo acierto reduce a 16 segundos, el tercero a 14 y así hasta dos. Un error de color conserva el coche y el marcador. Si una llegada acaba de llenar la cola antes de pintar, ya no se admite el acierto.'],
- tabla=[['Coches pintados','Cálculo en milisegundos','Intervalo'],['0','20000 - 0','20 segundos'],['1','20000 - 2000','18 segundos'],['3','20000 - 6000','14 segundos'],['9 o más','mínimo permitido: 2000','2 segundos']],
+ tabla=[['Coches pintados','Cálculo en milisegundos','Intervalo'],['0','20000 - 0','20 segundos'],['1','20000 - 2000','20 segundos'],['3','20000 - 6000','14 segundos'],['9 o más','mínimo permitido: 2000','2 segundos']],
  errores='No se puede pintar sin partida, con la cola vacía ni después del final. Se comprueba únicamente el color del frente. Cambiar de ejercicio no pausa el reloj: al consultar otra vez se calculan las llegadas que hayan vencido.',
  oral='La dificultad no aumenta reduciendo un contador decorativo: cambia el intervalo real de llegada. Cada acierto resta dos segundos y además puede adelantar la siguiente llegada. El límite inferior evita intervalos cero o negativos.'),
 

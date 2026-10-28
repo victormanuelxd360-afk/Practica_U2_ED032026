@@ -64,7 +64,7 @@ public sealed class Estado
             L5 = new { original = palabras.ToArray(), grupos = Algoritmos.Agrupar(palabras) },
             P1 = resultados.GetValueOrDefault("P1"), P2 = resultados.GetValueOrDefault("P2"), P3 = resultados.GetValueOrDefault("P3"), P4 = resultados.GetValueOrDefault("P4"),
             C1 = new { clientes = banco.Clientes.Lista(), capacidad = banco.Clientes.Capacidad, frente = banco.Clientes.ColaVacia() ? -1 : banco.Clientes.Frente().Turno, final = banco.Clientes.ColaVacia() ? -1 : banco.Clientes.Final().Turno, atencion = resultados.GetValueOrDefault("atencion") },
-            C2 = new { coches = juego.Coches.Lista().Select(c => new { c.Numero, color = c.Color.ToString() }).ToArray(), juego.Activo, juego.Pintados, juego.Record, juego.TiempoRecord, segundos = juego.Transcurrido(Environment.TickCount64), intervalo = juego.Intervalo / 1000 },
+            C2 = new { coches = juego.Coches.Lista().Select(c => new { c.Numero, color = c.Color.ToString() }).ToArray(), juego.Activo, juego.Pintados, juego.Record, juego.TiempoRecord, dificultad = juego.Dificultad, segundos = juego.Transcurrido(Environment.TickCount64), intervalo = juego.Intervalo / 1000 },
             C3 = new { autos = parking.Lista(), recibo = resultados.GetValueOrDefault("recibo") }
         };
     }

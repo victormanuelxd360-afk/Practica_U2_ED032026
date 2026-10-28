@@ -66,7 +66,7 @@ try {
     Confirmar-Practica ($r.estado.c2.coches.Count -eq 1 -and $r.estado.c2.activo) 'C2: partida y coche inicial'
     $r = Ejecutar-Practica C2 pintar @{color=$r.estado.c2.coches[0].color}
     Confirmar-Practica ($r.estado.c2.pintados -eq 1 -and $r.estado.c2.coches.Count -eq 0) 'C2: pintar el primer coche'
-    Confirmar-Practica ($r.estado.c2.intervalo -eq 18) 'C2: el primer acierto reduce el intervalo a 18 segundos'
+    Confirmar-Practica ($r.estado.c2.intervalo -eq 20 -and $r.estado.c2.dificultad -eq 'Fácil') 'C2: primeros cinco coches en nivel fácil de 20 segundos'
     Ejecutar-Practica C3 entrar @{placas='abc-123';propietario='Ana'} | Out-Null
     Ejecutar-Practica C3 entrar @{placas='xyz-987';propietario='Luis'} | Out-Null
     $r = Ejecutar-Practica C3 salir
