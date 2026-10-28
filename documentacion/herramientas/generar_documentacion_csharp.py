@@ -8,7 +8,7 @@ from reportlab.lib import colors
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
-BASE = Path(__file__).resolve().parents[1]
+BASE = Path(__file__).resolve().parents[2]
 pdfmetrics.registerFont(TTFont('Arial', 'C:/Windows/Fonts/arial.ttf'))
 pdfmetrics.registerFont(TTFont('ArialBold', 'C:/Windows/Fonts/arialbd.ttf'))
 styles = getSampleStyleSheet()
@@ -19,7 +19,7 @@ styles['Title'].fontName = styles['Heading1'].fontName = styles['Heading2'].font
 styles['Title'].leading = 28
 styles['Heading1'].leading = 22
 styles['Heading1'].textColor = colors.HexColor('#1b3457')
-datos = json.loads((BASE / 'datos_portada.json').read_text(encoding='utf-8-sig'))
+datos = json.loads((BASE / 'documentacion' / 'datos_portada.json').read_text(encoding='utf-8-sig'))
 story = []
 def p(texto, estilo='BodyText'):
     story.append(Paragraph(escape(texto), styles[estilo]))
@@ -55,7 +55,7 @@ for codigo, titulo, problema, entradas, proceso, salidas, pasos in ejercicios:
     for etiqueta, texto in [('Problema', problema), ('Entradas', entradas), ('Proceso', proceso), ('Salidas', salidas), ('Funcionamiento y evidencia', pasos)]:
         p(f'{etiqueta}: {texto}')
     story.append(Spacer(1, 8))
-    story.append(Image(str(BASE / 'evidencias-csharp' / f'{codigo}.png'), width=505, height=318))
+    story.append(Image(str(BASE / 'documentacion' / 'evidencias-csharp' / f'{codigo}.png'), width=505, height=318))
 
 story.append(PageBreak())
 p('Validación y pruebas', 'Heading1')

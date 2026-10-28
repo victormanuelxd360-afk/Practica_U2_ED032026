@@ -15,14 +15,14 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from contenido_codigo_web import EJERCICIOS_DETALLADOS
 
-BASE = Path(__file__).resolve().parents[1]
+BASE = Path(__file__).resolve().parents[2]
 SALIDA = BASE / 'documentacion/Documentacion_WEB.pdf'
 AZUL = HexColor('#173c60')
 VERDE = HexColor('#11685d')
 GRIS = HexColor('#405362')
 
 def generar():
-    datos = json.loads((BASE / 'datos_portada.json').read_text(encoding='utf-8-sig'))
+    datos = json.loads((BASE / 'documentacion/datos_portada.json').read_text(encoding='utf-8-sig'))
     fuente = (BASE / 'CSharp/Modelos.cs').read_text(encoding='utf-8-sig')
     archivos = ['CSharp/Modelos.cs', 'Web/Estado.cs', 'WebPublica/Program.cs', 'WebPublica/wwwroot/motor.js', 'Web/wwwroot/app.js']
     fuentes = {a: (BASE / a).read_text(encoding='utf-8-sig') for a in archivos}

@@ -28,7 +28,7 @@ Abre http://localhost:5188 en el navegador. En Windows también puedes hacer dob
 | Pilas | Invertir palabra; palíndromo; suma de números grandes; reemplazar valor |
 | Colas | Ventanilla de banco; juego de pintar coches; estacionamiento con cola circular doblemente ligada |
 
-Los formularios validan datos faltantes, rangos, duplicados, sobreflujo y colas vacías. Dinero y calificaciones usan decimal; se admite punto o coma decimal. La suma usa pilas de dígitos; el estacionamiento usa nodos circulares doblemente ligados. El juego se actualiza cada segundo en pantalla y reduce 2 segundos el intervalo con cada coche pintado, hasta un mínimo de 2 segundos; termina al acumular cinco.
+Los formularios validan datos faltantes, rangos, duplicados, sobreflujo y colas vacías. Dinero y calificaciones usan decimal; se admite punto o coma decimal. La suma usa pilas de dígitos; el estacionamiento usa nodos circulares doblemente ligados. El juego se actualiza cada segundo en pantalla, acelera por niveles según los coches pintados y termina al acumular cinco.
 
 ## Arquitectura y sesiones
 
@@ -37,11 +37,11 @@ Los formularios validan datos faltantes, rangos, duplicados, sobreflujo y colas 
 - `CSharp/Modelos.cs`: algoritmos C# compartidos con escritorio, compilados en el proyecto web mediante referencia de fuentes.
 - `herramientas/probar-web.ps1`: integración HTTP de los doce ejercicios, errores y aislamiento de sesiones.
 - `pruebas-web.txt`: resultado real de las pruebas.
-- `evidencias-web/`: captura de la versión web en funcionamiento.
+- `documentacion/`: informe PDF, portada, `datos_portada.json`, evidencias y los scripts que generan el informe (`documentacion/herramientas/`). El programa no depende de esta carpeta.
 
 Cada navegador tiene sus propias listas, colas, resultados y récord de juego. Se conservan al cambiar de ejercicio; se eliminan tras dos horas sin actividad, al cerrar la sesión del navegador, por límite de memoria o al reiniciar el servidor. No hay base de datos ni cuentas. El servidor mantiene hasta 1000 sesiones en caché; es una práctica académica, sin persistencia duradera. El récord web se conserva durante la sesión.
 
-Las carpetas CSharp, proyectos y legado-java conservan código de referencia. `documentacion/Documentacion_WEB.pdf` y `evidencias-web/` corresponden a la versión web. `documentacion/Documentacion_CSharp.pdf` y `evidencias-csharp/` corresponden a escritorio. Para desarrollar escritorio, cambia a la rama `escritorio`.
+Las carpetas CSharp, proyectos y legado-java conservan código de referencia. `documentacion/Documentacion_WEB.pdf` y `documentacion/evidencias-web/` corresponden a la versión web. `documentacion/Documentacion_CSharp.pdf` y `documentacion/evidencias-csharp/` corresponden a escritorio. Para desarrollar escritorio, cambia a la rama `escritorio`.
 
 ## Compilar y probar
 
@@ -65,7 +65,7 @@ Para ejecutarla con ASP.NET Core Runtime 10, entra en `ejecutables-web` y ejecut
 
 `documentacion/Documentacion_WEB.pdf` contiene 50 páginas con la portada enviada por el equipo, grupo 4.º A, los cuatro integrantes y el apellido **Almendarez**, con Z. Conserva el desarrollo y las evidencias, y añade la explicación de clases, métodos, estructuras, fragmentos reales de código, recorridos con datos y una guía para la exposición de los doce ejercicios. El mapa final permite localizar los métodos por su línea de inicio en el código.
 
-La fuente de la portada es `documentacion/Portada_equipo.png`. Los datos editables están en `datos_portada.json`. Para regenerar la documentación, ejecuta `python herramientas/generar_documentacion_web.py` con Python, reportlab, Pillow y pypdf en Windows. El script conserva el desarrollo inicial y reemplaza la guía anterior al regenerar, para evitar duplicarla.
+La fuente de la portada es `documentacion/Portada_equipo.png`. Los datos editables están en `documentacion/datos_portada.json`. Para regenerar la documentación, ejecuta `python documentacion/herramientas/generar_documentacion_web.py` con Python, reportlab, Pillow y pypdf en Windows. El script conserva el desarrollo inicial y reemplaza la guía anterior al regenerar, para evitar duplicarla.
 
 ## Web pública independiente de esta computadora
 

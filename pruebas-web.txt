@@ -13,7 +13,7 @@ OK | C1: rechazar sobreflujo
 OK | C1: atención FIFO y cola vacía
 OK | C2: partida y coche inicial
 OK | C2: pintar el primer coche
-OK | C2: el primer acierto reduce el intervalo a 18 segundos
+OK | C2: primeros cinco coches en nivel fácil de 20 segundos
 OK | C3: salida FIFO y recibo
 OK | Validación: nota fuera de rango
 OK | Validación: suma inválida

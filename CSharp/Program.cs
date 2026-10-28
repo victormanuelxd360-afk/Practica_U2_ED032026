@@ -165,7 +165,7 @@ public sealed class Ventana : Form
     }
     public void GuardarEvidencias()
     {
-        string carpeta = Path.Combine(Environment.CurrentDirectory, "evidencias-csharp"); Directory.CreateDirectory(carpeta);
+        string carpeta = Path.Combine(Environment.CurrentDirectory, "documentacion", "evidencias-csharp"); Directory.CreateDirectory(carpeta);
         Show();
         foreach (TabPage pagina in pestanas.TabPages)
         {
