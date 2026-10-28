@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 COPY Web/PracticaWeb.csproj Web/
-COPY CSharp/Modelos.cs CSharp/
+COPY CSharp/Ejercicios/ CSharp/Ejercicios/
 RUN dotnet restore Web/PracticaWeb.csproj
 COPY Web/ Web/
 RUN dotnet publish Web/PracticaWeb.csproj -c Release --no-restore -o /app/publish /p:UseAppHost=false

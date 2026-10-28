@@ -22,7 +22,7 @@ def copiar(origen, destino=None, raiz=BASE, carpeta=paquete):
 
 for carpeta in ('Web', 'WebPublica'):
     copiar(carpeta)
-copiar('CSharp/Modelos.cs')
+copiar('CSharp/Ejercicios')
 for archivo in ('Practica_U2_Web.sln', 'README.md', 'Dockerfile', '.dockerignore', 'railway.json', 'pruebas-web.txt'):
     copiar(archivo)
 for archivo in ('probar-web.ps1', 'preparar-publica.ps1', 'empaquetar-web.py'):
@@ -92,7 +92,7 @@ with zipfile.ZipFile(zip_salida, 'w', zipfile.ZIP_DEFLATED, compresslevel=6) as 
 with zipfile.ZipFile(zip_salida) as z:
     assert z.testzip() is None, 'El ZIP está dañado.'
     nombres = z.namelist()
-    for requerido in ('Publicacion/PracticaWeb.exe', 'Web/Program.cs', 'CSharp/Modelos.cs', 'WebPublica/Program.cs'):
+    for requerido in ('Publicacion/PracticaWeb.exe', 'Web/Program.cs', 'CSharp/Ejercicios/Colas/C2_JuegoCoches/Juego.cs', 'WebPublica/Program.cs'):
         assert 'Practica_U2_ED032026_WEB/' + requerido in nombres, requerido
     assert 'Practica_U2_Documentacion/Documentacion_WEB.pdf' in nombres, 'Documentacion_WEB.pdf'
 print(f'ZIP verificado: {zip_salida} ({zip_salida.stat().st_size / 1024 / 1024:.1f} MB)')

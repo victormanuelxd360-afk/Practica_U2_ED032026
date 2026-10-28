@@ -4,5 +4,5 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-  <ItemGroup><Compile Include="../CSharp/Modelos.cs" Link="Modelos.cs" /></ItemGroup>
+  <ItemGroup><Compile Include="../CSharp/Ejercicios/**/*.cs" LinkBase="Ejercicios" /></ItemGroup>
 </Project>

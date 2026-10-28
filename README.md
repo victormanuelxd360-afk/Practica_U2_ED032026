@@ -30,11 +30,30 @@ Abre http://localhost:5188 en el navegador. En Windows también puedes hacer dob
 
 Los formularios validan datos faltantes, rangos, duplicados, sobreflujo y colas vacías. Dinero y calificaciones usan decimal; se admite punto o coma decimal. La suma usa pilas de dígitos; el estacionamiento usa nodos circulares doblemente ligados. El juego se actualiza cada segundo en pantalla, acelera por niveles según los coches pintados y termina al acumular cinco.
 
+### Dónde está el código C# de cada ejercicio
+
+| Ejercicio | Carpeta en `CSharp/Ejercicios/` | Clase o método |
+| --- | --- | --- |
+| L1 Productos disponibles y retirados | `Listas/L1_Productos/` | `Almacen` |
+| L2 Pares e impares | `Listas/L2_ParesImpares/` | `Algoritmos.Clasificar` |
+| L3 Aprobados y reprobados | `Listas/L3_Calificaciones/` | `Alumno`, `Grupo` |
+| L4 Eliminar y ordenar productos | `Listas/L4_Compra/` | `Compra` |
+| L5 Palabras por letra | `Listas/L5_Palabras/` | `Algoritmos.Agrupar` |
+| P1 Invertir palabra | `Pilas/P1_InvertirPalabra/` | `Algoritmos.Invertir` |
+| P2 Palíndromo | `Pilas/P2_Palindromo/` | `Algoritmos.Palindromo` |
+| P3 Suma de números grandes | `Pilas/P3_SumaGrande/` | `Algoritmos.SumarGrandes` |
+| P4 Reemplazar valor | `Pilas/P4_Reemplazar/` | `Algoritmos.Reemplazar` |
+| C1 Ventanilla de banco | `Colas/C1_Banco/` | `Cliente`, `Banco` |
+| C2 Juego de pintar coches | `Colas/C2_JuegoCoches/` | `ColorAuto`, `Coche`, `Juego` |
+| C3 Estacionamiento | `Colas/C3_Estacionamiento/` | `Auto`, `Recibo`, `ColaCircularDoblementeLigada` |
+
+`Comun/` contiene `Validar` y `Producto`, que usan L1 y L4. `Colas/Cola.cs` es la cola de capacidad fija que usan C1 y C2. `Algoritmos` es una clase `partial`: cada ejercicio de listas y pilas aporta su método desde su propia carpeta. La interfaz de los doce ejercicios sigue en una sola página (`Web/wwwroot/`) y `Web/Estado.cs` conecta cada botón con su clase.
+
 ## Arquitectura y sesiones
 
 - `Web/Program.cs`: API y estado por sesión con cookie HttpOnly y SameSite Strict.
 - `Web/wwwroot/`: interfaz HTML, CSS y JavaScript sin dependencias externas.
-- `CSharp/Modelos.cs`: algoritmos C# compartidos con escritorio, compilados en el proyecto web mediante referencia de fuentes.
+- `CSharp/Ejercicios/`: algoritmos C# compartidos con escritorio, una carpeta por ejercicio, compilados en el proyecto web mediante referencia de fuentes.
 - `herramientas/probar-web.ps1`: integración HTTP de los doce ejercicios, errores y aislamiento de sesiones.
 - `pruebas-web.txt`: resultado real de las pruebas.
 - `documentacion/`: informe PDF, portada, `datos_portada.json`, evidencias y los scripts que generan el informe (`documentacion/herramientas/`). El programa no depende de esta carpeta.

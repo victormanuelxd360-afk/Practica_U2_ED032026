@@ -21,30 +21,31 @@ OK | 20. P4: pila vacía
 OK | 21. C1: cola vacía
 OK | 22. C1: sobreflujo
 OK | 23. C1: FIFO, frente, final y espera
-OK | 24. C2: no llega antes de veinte segundos
-OK | 25. C2: llegada exacta a veinte segundos
-OK | 26. C2: color incorrecto
-OK | 27. C2: aceleración y récord
-OK | 28. C2: fin con cinco coches y reloj detenido
-OK | 29. C3: estacionamiento vacío
-OK | 30. C3: placas únicas
-OK | 31. C3: FIFO, cobro y enlaces
-OK | 32. C3: mil nodos, circularidad y eliminación del último
-OK | 33. Validación: coma decimal
-OK | 34. Validación: entero
-OK | 35. Validación: faltantes
-OK | 36. Interfaz: doce ejercicios
-OK | 37. Interfaz L1: botón escanear
-OK | 38. Interfaz: flujo completo L1. Productos disponibles y retirados
-OK | 39. Interfaz: flujo completo L2. Pares e impares
-OK | 40. Interfaz: flujo completo L3. Aprobados y reprobados
-OK | 41. Interfaz: flujo completo L4. Eliminar y ordenar productos
-OK | 42. Interfaz: flujo completo L5. Palabras por letra
-OK | 43. Interfaz: flujo completo P1. Invertir palabra
-OK | 44. Interfaz: flujo completo P2. Palíndromo
-OK | 45. Interfaz: flujo completo P3. Suma de números grandes
-OK | 46. Interfaz: flujo completo P4. Reemplazar valor
-OK | 47. Interfaz: flujo completo C1. Ventanilla de banco
-OK | 48. Interfaz: flujo completo C2. Juego de pintar coches
-OK | 49. Interfaz: flujo completo C3. Estacionamiento
-TOTAL: 49 verificaciones correctas. Sin fallos.
+OK | 24. C2: nivel fácil inicial de veinte segundos
+OK | 25. C2: no llega antes de veinte segundos
+OK | 26. C2: llegada exacta a veinte segundos
+OK | 27. C2: color incorrecto
+OK | 28. C2: mantiene nivel fácil durante los primeros cinco aciertos
+OK | 29. C2: fin con cinco coches y reloj detenido
+OK | 30. C3: estacionamiento vacío
+OK | 31. C3: placas únicas
+OK | 32. C3: FIFO, cobro y enlaces
+OK | 33. C3: mil nodos, circularidad y eliminación del último
+OK | 34. Validación: coma decimal
+OK | 35. Validación: entero
+OK | 36. Validación: faltantes
+OK | 37. Interfaz: doce ejercicios
+OK | 38. Interfaz L1: botón escanear
+OK | 39. Interfaz: flujo completo L1. Productos disponibles y retirados
+OK | 40. Interfaz: flujo completo L2. Pares e impares
+OK | 41. Interfaz: flujo completo L3. Aprobados y reprobados
+OK | 42. Interfaz: flujo completo L4. Eliminar y ordenar productos
+OK | 43. Interfaz: flujo completo L5. Palabras por letra
+OK | 44. Interfaz: flujo completo P1. Invertir palabra
+OK | 45. Interfaz: flujo completo P2. Palíndromo
+OK | 46. Interfaz: flujo completo P3. Suma de números grandes
+OK | 47. Interfaz: flujo completo P4. Reemplazar valor
+OK | 48. Interfaz: flujo completo C1. Ventanilla de banco
+OK | 49. Interfaz: flujo completo C2. Juego de pintar coches
+OK | 50. Interfaz: flujo completo C3. Estacionamiento
+TOTAL: 50 verificaciones correctas. Sin fallos.
