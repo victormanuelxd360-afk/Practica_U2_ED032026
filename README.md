@@ -52,3 +52,5 @@ En pruebas y capturas (`--probar`) los mensajes se registran sin abrir ventanas 
 ## Equipo
 
 El repositorio es público; para editar directamente hay que aceptar la invitación como colaborador. GitHub Actions compila y prueba C# con cada push y pull request. Integrantes y grupo pendientes en `datos_portada.json`. Entrega del enunciado: 23 de octubre de 2026.
+
+Colaborador conectado: Jesus Joel Canche Chac (prueba de push, 11 de noviembre de 2026).
